@@ -64,6 +64,38 @@ The app sends `POST /api/chat` to its own server. That server validates the shar
 
 **Security caveat:** The shared access code is suitable for a small private demonstration, **not** public, untrusted, production-scale use. A real release needs per-user authentication, server-side user authorization, persistent cloud rate limiting, abuse controls, costs/budgets, and a database. The included rate limiter is in-memory and applies per Node process. To avoid exposing the key or exhausting your API balance, do not distribute the pilot access code widely. Protect production traffic with HTTPS.
 
+## Publish on Vercel
+
+The site files in `public/` are served as a static site. `api/chat.mjs` and `api/status.mjs` run as Vercel functions and call Groq. Local `npm start` still uses `server.mjs`.
+
+1. Create a free account at https://vercel.com.
+2. From this folder, deploy:
+
+```bash
+npx vercel login
+npx vercel --prod
+```
+
+3. When the CLI asks, accept the project defaults. Framework is already set to none, and the output directory is `public`.
+4. Add the same secrets you put in `.env`. Do this in the Vercel project under **Settings → Environment Variables**, for Production:
+
+```dotenv
+GROQ_API_KEY=gsk-your-secret-key
+GROQ_MODEL=openai/gpt-oss-120b
+APP_ACCESS_CODE=a-long-random-code-unique-to-your-pilot
+CHAT_REQUESTS_PER_MINUTE=10
+```
+
+5. Redeploy so the functions can see the variables:
+
+```bash
+npx vercel --prod
+```
+
+6. Open the `https://….vercel.app` URL the CLI prints. On the AI Assistant screen, enter the same pilot access code.
+
+Vercel provides HTTPS, so the home-screen install flow works on that URL. The included rate limit is still per function instance, so it is only a pilot control. Keep the access code private.
+
 ## Publish on an Ubuntu VPS with Docker
 
 With an existing VPS and reverse proxy:
@@ -141,7 +173,10 @@ CSV includes date, coffee, roast level, mass readings, yellowing, first crack, d
 ## Important source files
 
 ```text
-server.mjs                secure local HTTP server and Groq API gateway
+server.mjs                local HTTP server
+lib/ai.mjs                Groq chat gateway shared by the local server and Vercel
+api/chat.mjs + api/status.mjs   Vercel functions
+vercel.json               Vercel static site and function settings
 public/index.html         single-page app layout
 public/styles.css         responsive styling
 public/app.js             UI screens, lessons, logs, planner, troubleshooting
