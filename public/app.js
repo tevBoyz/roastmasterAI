@@ -1,4 +1,4 @@
-import { calculateRoast, parseTime, formatTime, csvEscape } from './lib.js';
+import { calculateRoast, parseTime, formatTime, csvEscape, formatChatMarkdown } from './lib.js';
 
 const KEY = 'roastmaster-pilot-v1';
 const LESSONS = [
@@ -180,7 +180,12 @@ function renderChat() {
     role.textContent = msg.role === 'user' ? 'YOU' : (msg.source === 'offline' ? 'OFFLINE REFERENCE' : 'ROASTMASTER AI');
     const text = document.createElement('div');
     text.className = 'chat-msg-text';
-    text.textContent = msg.content;
+    if (msg.role === 'assistant') {
+      text.classList.add('rich');
+      text.innerHTML = formatChatMarkdown(msg.content);
+    } else {
+      text.textContent = msg.content;
+    }
     body.append(role, text);
     wrap.append(avatar, body);
     root.appendChild(wrap);

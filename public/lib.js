@@ -23,6 +23,59 @@ export function calculateRoast({green, roasted, firstCrack, drop}) {
     dtrPct: development / drop * 100
   };
 }
+function escapeHtml(value) {
+  return String(value ?? '').replace(/[&<>"']/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[ch]));
+}
+function unwrapQuoted(text) {
+  return text.replace(/^(?:&quot;|&#39;|[“”])([\s\S]+?)(?:&quot;|&#39;|[“”])$/, '$1');
+}
+function formatInline(text) {
+  return unwrapQuoted(text)
+    .replace(/`([^`]+)`/g, '<code>$1</code>')
+    .replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
+    .replace(/\*\*([^*]+)\*\*/g, (_, inner) => `<strong>${unwrapQuoted(inner)}</strong>`)
+    .replace(/__([^_]+)__/g, (_, inner) => `<strong>${unwrapQuoted(inner)}</strong>`)
+    .replace(/(^|[^*])\*([^*\n]+)\*/g, (_, prefix, inner) => `${prefix}<em>${unwrapQuoted(inner)}</em>`);
+}
+export function formatChatMarkdown(value) {
+  const lines = escapeHtml(value).replace(/\r\n/g, '\n').split('\n');
+  const blocks = [];
+  let index = 0;
+  while (index < lines.length) {
+    if (!lines[index].trim()) { index++; continue; }
+    const heading = /^(#{1,3})\s+(.+)$/.exec(lines[index]);
+    if (heading) {
+      blocks.push(`<h3>${formatInline(heading[2])}</h3>`);
+      index++;
+      continue;
+    }
+    if (/^[-*]\s+/.test(lines[index])) {
+      const items = [];
+      while (index < lines.length && /^[-*]\s+/.test(lines[index])) {
+        items.push(`<li>${formatInline(lines[index].replace(/^[-*]\s+/, ''))}</li>`);
+        index++;
+      }
+      blocks.push(`<ul>${items.join('')}</ul>`);
+      continue;
+    }
+    if (/^\d+\.\s+/.test(lines[index])) {
+      const items = [];
+      while (index < lines.length && /^\d+\.\s+/.test(lines[index])) {
+        items.push(`<li>${formatInline(lines[index].replace(/^\d+\.\s+/, ''))}</li>`);
+        index++;
+      }
+      blocks.push(`<ol>${items.join('')}</ol>`);
+      continue;
+    }
+    const paragraph = [];
+    while (index < lines.length && lines[index].trim() && !/^[-*]\s+/.test(lines[index]) && !/^\d+\.\s+/.test(lines[index]) && !/^#{1,3}\s+/.test(lines[index])) {
+      paragraph.push(lines[index]);
+      index++;
+    }
+    blocks.push(`<p>${formatInline(paragraph.join('<br>'))}</p>`);
+  }
+  return blocks.join('');
+}
 export function csvEscape(value) {
   const text = String(value ?? '');
   // Also prevent formula execution in Excel/Sheets by prefixing formula-looking cells.
