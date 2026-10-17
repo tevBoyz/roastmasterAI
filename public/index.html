@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#151713">
+  <meta name="description" content="RoastMaster AI: your coffee roasting assistant, classroom and roast logbook.">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="RoastMaster">
+  <link rel="icon" type="image/svg+xml" href="/icons/logo.svg">
+  <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="stylesheet" href="/styles.css">
+  <title>RoastMaster AI | Your Coffee Roasting Lab</title>
+</head>
+<body>
+  <div id="app-shell">
+    <aside class="sidebar" aria-label="Primary navigation">
+      <div class="brand">
+        <div class="brand-icon" aria-hidden="true"><svg width="29" height="29" viewBox="0 0 48 48" fill="none"><path d="M14 9c14-4 27 3 26 16-1 15-14 20-27 15C1 35 1 15 14 9Z" stroke="currentColor" stroke-width="3"/><path d="M26 10c-8 10 1 14-6 26" stroke="currentColor" stroke-width="3.6" stroke-linecap="round"/></svg></div>
+        <div><div class="brand-name">RoastMaster <em>AI</em></div><div class="brand-caption">THE ROASTING STUDIO</div></div>
+      </div>
+      <div class="sidebar-tag">YOUR WORKSPACE</div>
+      <nav class="sidebar-nav">
+        <button class="nav-link selected" type="button" data-nav="dashboard"><span class="nav-symbol">▦</span> Overview</button>
+        <button class="nav-link" type="button" data-nav="assistant"><span class="nav-symbol">✦</span> AI Assistant <span class="nav-pill">AI</span></button>
+        <button class="nav-link" type="button" data-nav="academy"><span class="nav-symbol">▤</span> Roasting Academy</button>
+        <button class="nav-link" type="button" data-nav="profiles"><span class="nav-symbol">◷</span> Profile Planner</button>
+        <button class="nav-link" type="button" data-nav="kuban"><span class="nav-symbol">⚙</span> Kuban 5KG Guide</button>
+        <button class="nav-link" type="button" data-nav="logbook"><span class="nav-symbol">▣</span> Roast Logbook</button>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="side-note"><span class="side-note-mark">✧</span><b>Better roasting starts with better records.</b><span>Observe, record, taste, repeat.</span></div>
+        <button class="nav-link" type="button" data-nav="settings"><span class="nav-symbol">⚑</span> Settings &amp; Help</button>
+        <div class="sidebar-version">ROASTMASTER 0.1.0 · PILOT</div>
+      </div>
+    </aside>
+    <div class="main-shell">
+      <header class="topbar">
+        <div class="crumb">ROASTMASTER <span>/</span> <strong id="page-crumb">OVERVIEW</strong></div>
+        <div class="topbar-right"><span class="status-dot" id="ai-dot"></span><span id="top-ai-status">Checking AI…</span><span class="vertical-divider"></span><span class="profile-initial">R</span><span id="top-role-name">Roaster</span></div>
+      </header>
+      <main id="main-content">
+        <section class="view active" id="view-dashboard">
+          <div class="hero">
+            <div class="hero-copy"><p class="eyebrow hero-eyebrow">WELCOME TO YOUR ROASTING STUDIO</p><h1>From green bean<br>to <i>great coffee.</i></h1><p class="hero-description">One workspace to ask better questions, sharpen your roasting skills and keep every batch worth remembering.</p><div class="hero-buttons"><button class="btn btn-primary" type="button" data-goto="assistant">✦ Ask RoastMaster AI <span aria-hidden="true">↗</span></button><button class="btn btn-glass" type="button" data-goto="logbook">＋ Log a roast</button></div></div><div class="hero-art" aria-hidden="true"><div class="art-ring ring-one"></div><div class="art-ring ring-two"></div><div class="bean bean-a"></div><div class="bean bean-b"></div><div class="bean bean-c"></div><span class="art-label">ROAST<br>YOUR<br>BEST.</span></div>
+          </div>
+          <div class="dashboard-greeting"><div><p class="eyebrow">AT A GLANCE</p><h2>Make every roast count.</h2></div><p id="role-welcome">Your knowledge, profiles and roasting records in one place.</p></div>
+          <div class="metric-grid">
+            <div class="metric-card"><div class="metric-icon">◷</div><p>Total roast sessions</p><strong id="metric-roasts">0</strong><span class="fine">Recorded on this device</span></div>
+            <div class="metric-card"><div class="metric-icon">▤</div><p>Lessons completed</p><strong id="metric-lessons">0<span class="metric-denominator"> / 8</span></strong><span class="fine">Your learning progress</span></div>
+            <div class="metric-card"><div class="metric-icon">◈</div><p>Avg. roast weight loss</p><strong id="metric-loss">—</strong><span class="fine">Based on saved batches</span></div>
+          </div>
+          <div class="section-heading"><div><p class="eyebrow">EXPLORE THE STUDIO</p><h2>What would you like to do?</h2></div></div>
+          <div class="feature-grid">
+            <button type="button" class="feature-card feature-ai" data-goto="assistant"><span class="feature-icon">✦</span><span class="feature-title">Ask the AI assistant <b>↗</b></span><span class="feature-description">Questions about roasting science, profiles, quality and defects.</span><span class="feature-tag">POWERED BY GROQ</span></button>
+            <button type="button" class="feature-card" data-goto="academy"><span class="feature-icon">▤</span><span class="feature-title">Roasting Academy <b>↗</b></span><span class="feature-description">Learn the chemistry, technique and decisions behind every roast.</span><span class="feature-tag">8 PRACTICAL LESSONS</span></button>
+            <button type="button" class="feature-card" data-goto="profiles"><span class="feature-icon">◷</span><span class="feature-title">Plan a profile <b>↗</b></span><span class="feature-description">Build a structured plan for your coffee, batch and desired cup.</span><span class="feature-tag">KUBAN 5KG FOCUSED</span></button>
+            <button type="button" class="feature-card" data-goto="kuban"><span class="feature-icon">⚙</span><span class="feature-title">Machine help <b>↗</b></span><span class="feature-description">Work through a safe troubleshooting checklist for your roaster.</span><span class="feature-tag">MAINTENANCE & SAFETY</span></button>
+          </div>
+          <div class="tip-strip"><div class="tip-icon">✧</div><div><b>Roaster's note</b><p>Time and temperature curves are clues. The cup is the final judge. Keep your roast conditions consistent and change one variable at a time.</p></div></div>
+        </section>
+        <section class="view" id="view-assistant">
+          <div class="page-intro"><p class="eyebrow">YOUR ROASTING COMPANION</p><h1>Ask RoastMaster <i>AI.</i></h1><p>Ask any coffee roasting question and get an explanation tuned for a roaster or student.</p></div>
+          <div class="chat-layout">
+            <div class="chat-panel">
+              <div class="chat-panel-header"><div class="assistant-avatar">✦</div><div class="chat-header-copy"><strong>RoastMaster Assistant</strong><span id="chat-availability">Checking connection…</span></div><button id="clear-chat" class="btn btn-quiet btn-small" type="button">Clear chat</button></div>
+              <div class="chat-history" id="chat-history" aria-live="polite"></div>
+              <div class="chat-input-area"><form id="chat-form"><label for="chat-input" class="sr-only">Your roasting question</label><textarea id="chat-input" rows="2" maxlength="2300" placeholder="Ask anything about coffee roasting…" required></textarea><div class="chat-input-actions"><span>Enter to send · Shift+Enter for a new line</span><button class="btn btn-primary" type="submit" id="chat-send">Send ↗</button></div></form></div>
+            </div>
+            <aside class="chat-side"><div class="side-panel"><p class="eyebrow">START HERE</p><h3>Popular questions</h3><div id="suggested-questions" class="suggestion-stack"></div></div><div class="side-panel caution"><span class="caution-symbol">ⓘ</span><h3>Keep the roast safe</h3><p>AI can explain and troubleshoot, but it cannot read or control your machine. Verify gas, electrical and safety guidance with the Kuban manual and qualified technicians.</p></div><div class="side-panel" id="ai-setup-panel"><p class="eyebrow">AI CONNECTION</p><h3>Pilot access</h3><p class="muted-copy">Ask the app owner for the access code configured on the server.</p><label for="pilot-code">Access code</label><input type="password" id="pilot-code" autocomplete="off" placeholder="Enter pilot access code"><button class="btn btn-secondary btn-wide" type="button" id="save-pilot-code">Use access code</button><small id="pilot-code-feedback"></small></div></aside>
+          </div>
+        </section>
+        <section class="view" id="view-academy">
+          <div class="page-intro"><p class="eyebrow">LEARN BY DOING</p><h1>Roasting <i>Academy.</i></h1><p>Eight practical modules with clear explanations and quick knowledge checks.</p></div>
+          <div class="academy-progress"><div><span class="eyebrow">YOUR PROGRESS</span><h3><span id="progress-count">0</span> of 8 modules completed</h3></div><div class="progress-track"><div id="progress-fill" class="progress-fill"></div></div></div>
+          <div class="lesson-grid" id="lesson-grid"></div>
+          <div class="lesson-detail hidden" id="lesson-detail" aria-live="polite"></div>
+        </section>
+        <section class="view" id="view-profiles">
+          <div class="page-intro"><p class="eyebrow">ROAST WITH INTENTION</p><h1>Profile <i>Planner.</i></h1><p>Turn a coffee and a flavor goal into a structured, repeatable experiment.</p></div>
+          <div class="two-column">
+            <div class="form-panel"><div class="form-heading"><span class="form-heading-icon">◷</span><div><h3>New roast plan</h3><p>Set your goals and conditions.</p></div></div><form id="profile-form">
+              <label for="profile-coffee">Coffee / origin</label><input id="profile-coffee" name="coffee" required maxlength="100" placeholder="e.g. Yirgacheffe washed">
+              <div class="form-row"><div><label for="profile-process">Processing method</label><select id="profile-process"><option>Washed</option><option>Natural</option><option>Honey</option><option>Other / experimental</option></select></div><div><label for="profile-batch">Green weight (kg)</label><input id="profile-batch" type="number" min="0.1" max="5" step="0.1" value="2" required></div></div>
+              <label for="profile-level">Target roast level</label><select id="profile-level"><option>Light</option><option selected>Medium</option><option>Dark</option></select>
+              <label for="profile-goal">What are you aiming for?</label><textarea id="profile-goal" rows="3" maxlength="500" placeholder="e.g. Clear citrus acidity, floral aromatics, clean sweetness…"></textarea>
+              <button class="btn btn-primary btn-wide" type="submit">Create my roast plan ↗</button>
+            </form></div>
+            <div class="plan-panel" id="profile-output"><div class="empty-plan"><span class="empty-plan-icon">◎</span><h3>Your plan starts here</h3><p>Fill in your coffee details and we'll build a phased worksheet for your next roast.</p></div></div>
+          </div>
+          <div class="notice"><b>Why no fixed charge temperature?</b> Each gas drum roaster, probe, batch size and coffee behaves differently. This planner deliberately avoids inventing unverified Kuban settings. Compare against your own recorded baselines.</div>
+        </section>
+        <section class="view" id="view-kuban">
+          <div class="page-intro"><p class="eyebrow">MACHINE KNOWLEDGE</p><h1>Your Kuban <i>Base 5KG.</i></h1><p>A safe reference guide for a gas drum roaster, with practical troubleshooting steps.</p></div>
+          <div class="machine-summary"><div class="machine-monogram">K<span>5</span></div><div><div class="eyebrow">YOUR FEATURED ROASTER</div><h3>Kuban Base · 5KG</h3><p>Gas-fired drum roaster. Always use the exact model's manufacturer documentation to verify controls and operating limits.</p></div><span class="machine-tag">GAS DRUM</span></div>
+          <div class="section-heading"><div><p class="eyebrow">BEFORE EVERY SESSION</p><h2>Safe-start checklist</h2></div></div>
+          <div class="checklist" id="machine-checklist">
+            <label><input type="checkbox"><span>Ventilation and exhaust path have been checked.</span></label>
+            <label><input type="checkbox"><span>Chaff collection is clean and properly installed.</span></label>
+            <label><input type="checkbox"><span>Gas lines and connections are in a safe condition.</span></label>
+            <label><input type="checkbox"><span>Drum, airflow and cooling systems operate as expected.</span></label>
+            <label><input type="checkbox"><span>Emergency shutoff and safety guidance are understood.</span></label>
+          </div>
+          <div class="section-heading"><div><p class="eyebrow">TROUBLESHOOTING</p><h2>What's happening?</h2></div></div><div id="machine-issues" class="issue-list"></div>
+          <div class="warning-panel"><span>⚠</span><p><b>Gas / smoke / electrical emergency:</b> Stop operation only if it is safe, avoid ignition sources, move to fresh air if needed, and contact emergency services or a qualified technician. Never bypass safety interlocks.</p></div>
+        </section>
+        <section class="view" id="view-logbook">
+          <div class="page-intro page-intro-with-button"><div><p class="eyebrow">RECORD. COMPARE. IMPROVE.</p><h1>Roast <i>Logbook.</i></h1><p>Your personal record of each batch, key milestones and sensory outcomes.</p></div><button id="export-logs" type="button" class="btn btn-secondary">↓ Export CSV</button></div>
+          <div class="metric-grid log-metrics"><div class="metric-card"><p>Saved batches</p><strong id="log-total">0</strong><span class="fine">On this device</span></div><div class="metric-card"><p>Average loss</p><strong id="log-loss">—</strong><span class="fine">Weight loss from roasting</span></div><div class="metric-card"><p>Average DTR</p><strong id="log-dtr">—</strong><span class="fine">Development time ratio</span></div></div>
+          <div class="two-column two-column-logs"><div class="form-panel"><div class="form-heading"><span class="form-heading-icon">＋</span><div><h3>Record a new roast</h3><p>Keep the important measurements.</p></div></div><form id="log-form">
+            <label for="log-coffee">Coffee / origin</label><input id="log-coffee" required maxlength="100" placeholder="e.g. Sidama natural">
+            <div class="form-row"><div><label for="log-green">Green weight (kg)</label><input id="log-green" type="number" min="0.1" max="5" step="0.01" value="2" required></div><div><label for="log-roasted">Roasted weight (kg)</label><input id="log-roasted" type="number" min="0.01" step="0.01" placeholder="e.g. 1.70" required></div></div>
+            <div class="form-row"><div><label for="log-yellow">Yellowing (mm:ss)</label><input id="log-yellow" placeholder="e.g. 04:30" inputmode="numeric"></div><div><label for="log-first">First crack (mm:ss)</label><input id="log-first" placeholder="e.g. 08:30" inputmode="numeric" required></div></div>
+            <div class="form-row"><div><label for="log-drop">Drop time (mm:ss)</label><input id="log-drop" placeholder="e.g. 10:00" inputmode="numeric" required></div><div><label for="log-level">Roast level</label><select id="log-level"><option>Light</option><option selected>Medium</option><option>Dark</option></select></div></div>
+            <label for="log-notes">Control changes / tasting notes</label><textarea id="log-notes" rows="3" maxlength="900" placeholder="Gas and airflow changes, drop temperature, aroma, flavor, what to change next…"></textarea>
+            <div class="form-error" id="log-error" role="alert"></div><button class="btn btn-primary btn-wide" type="submit">＋ Save roast session</button></form></div>
+            <div><div class="list-heading"><h3>Saved roast sessions</h3><span class="fine">Stored in this browser</span></div><div id="log-entries" class="log-entries"></div></div></div>
+          <div class="notice"><b>Storage notice:</b> Logs stay on this browser until you clear its data. Export your logs regularly. Accounts, device sync and team records are planned for a later release.</div>
+        </section>
+        <section class="view" id="view-settings">
+          <div class="page-intro"><p class="eyebrow">YOUR WORKSPACE</p><h1>Settings &amp; <i>Help.</i></h1><p>Choose your learning mode, install the app and understand its current limitations.</p></div>
+          <div class="settings-grid"><div class="form-panel"><h3>How are you using RoastMaster?</h3><p class="muted-copy">This changes your welcome message. It is not an authenticated teacher/student account.</p><label for="role-setting">My mode</label><select id="role-setting"><option value="roaster">Roaster / Instructor</option><option value="student">Student</option></select><button id="save-role" class="btn btn-primary" type="button">Save mode</button></div>
+          <div class="form-panel"><h3>Install on your phone</h3><p class="muted-copy"><b>Android:</b> Open this site in Chrome over HTTPS, then use Install app or Add to Home screen from the browser menu.</p><p class="muted-copy"><b>iPhone:</b> Open this site in Safari, tap Share and choose Add to Home Screen.</p><p class="fine">You need to deploy this app first for a public HTTPS link.</p></div>
+          <div class="form-panel"><h3>AI connection</h3><p class="muted-copy" id="settings-ai-status">Checking server…</p><p class="fine">The AI API key lives only on the server. A pilot access code limits use but is not a substitute for individual accounts and production abuse protection.</p></div>
+          <div class="form-panel"><h3>Your privacy</h3><p class="muted-copy">Roast logs, course progress and chat transcripts are stored locally on your device. Questions sent to the AI are processed by the configured AI provider. Never include passwords or sensitive personal information in questions.</p><button class="btn btn-outline-danger" type="button" id="clear-history">Clear my local chat history</button></div></div>
+        </section>
+      </main>
+      <footer class="main-footer"><span>© RoastMaster AI · Coffee craft, thoughtfully taught.</span><span>Educational pilot · Not a machine control system</span></footer>
+    </div>
+    <nav class="mobile-nav" aria-label="Mobile navigation">
+      <button class="mobile-link selected" type="button" data-nav="dashboard"><span>▦</span>Home</button>
+      <button class="mobile-link" type="button" data-nav="assistant"><span>✦</span>Ask AI</button>
+      <button class="mobile-link" type="button" data-nav="academy"><span>▤</span>Learn</button>
+      <button class="mobile-link" type="button" data-nav="profiles"><span>◷</span>Profiles</button>
+      <button class="mobile-link" type="button" data-nav="logbook"><span>▣</span>Logs</button>
+      <button class="mobile-more" id="mobile-more" type="button" aria-label="More pages" aria-expanded="false"><span>···</span>More</button>
+    </nav>
+    <div class="mobile-more-menu hidden" id="mobile-more-menu"><button type="button" data-nav="kuban">⚙ Kuban machine guide</button><button type="button" data-nav="settings">⚑ Settings &amp; Help</button></div>
+  </div>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>
