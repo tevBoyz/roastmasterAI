@@ -223,7 +223,7 @@ async function sendChat(question) {
   $('chat-send').disabled = true;
   $('chat-send').textContent = 'Thinking…';
   try {
-    const latest = state.chat.filter(m => m.source !== 'offline' || m.role === 'user').slice(-10).map(m => ({ role: m.role, content: m.content }));
+    const latest = state.chat.filter(m => m.source !== 'offline' || m.role === 'user').slice(-14).map(m => ({ role: m.role, content: m.content.trim().slice(0, 2300) })).filter(m => m.content);
     const response = await fetch('/api/chat', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'x-access-code': state.code },
